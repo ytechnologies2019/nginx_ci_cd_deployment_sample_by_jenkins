@@ -1,22 +1,35 @@
-pipeline { 
-    agent any 
-    options {
-        skipStagesAfterUnstable()
-    }
+pipeline {
+    agent any
+
     stages {
-        stage('Build') { 
-            steps { 
-                sh 'ls ' 
+        stage('Init') {
+            steps {
+                echo 'Initializing..'
+                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
             }
         }
-        stage('Test'){
+        stage('Test') {
             steps {
-                sh 'whoami'
+                echo 'Testing..'
+                echo 'Running pytest..'
             }
         }
-        stage('Deploy') {
+        stage('Build') {
             steps {
-                sh 'hostname'
+                echo 'Building..'
+                echo 'Running docker build -t sntshk/cotu .'
+            }
+        }
+        stage('Publish') {
+            steps {
+                echo 'Publishing..'
+                echo 'Running docker push..'
+            }
+        }
+        stage('Cleanup') {
+            steps {
+                echo 'Cleaning..'
+                echo 'Running docker rmi..'
             }
         }
     }
