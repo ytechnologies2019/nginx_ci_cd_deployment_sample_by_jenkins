@@ -16,8 +16,8 @@ pipeline {
                     sshCommand remote: remote, command: 'hostname'
                 } 
             }
-
-        stage('check_ls') {
+        }
+        stage('check_list') {
             steps {
                 script {
                     def remote = [:]
@@ -28,9 +28,8 @@ pipeline {
                     remote.allowAnyHosts = true
 
                     // SSH into the remote server and run the hostname command
-                    sshCommand remote: remote, command: 'ls -alht'
-                }
-            
+                    sshCommand remote: remote, command: 'ls -al'
+                } 
             }
         }
     }
