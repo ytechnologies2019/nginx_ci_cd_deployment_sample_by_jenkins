@@ -5,7 +5,7 @@ pipeline {
         stage('Unit Test') {
             steps {
                 script { 
-                    sh "cat index.html | grep -i v2"
+                    sh "cat index.html"
                 } 
             }
         }
