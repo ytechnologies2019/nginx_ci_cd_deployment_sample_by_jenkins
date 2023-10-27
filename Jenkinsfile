@@ -12,7 +12,8 @@ pipeline {
                     remote.password = 'Student@123!@#'
                     remote.allowAnyHosts = true
                     ]
-                    }
                 }
             }
         }
+    }
+}   
