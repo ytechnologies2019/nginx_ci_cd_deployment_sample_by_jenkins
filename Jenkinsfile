@@ -6,8 +6,10 @@ pipeline {
     stages {
         stage('Unit Test') {
             steps {
-                script {
+                script { 
+                    stage (git clone) {
                     sh "git clone https://github.com/ytechnologies2019/nginx_ci_cd_deployment_sample_by_jenkins.git"
+                    }
                     sh "cat nginx_ci_cd_deployment_sample_by_jenkins/index.html"
                 } 
             }
