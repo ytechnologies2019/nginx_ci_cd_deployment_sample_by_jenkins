@@ -1,19 +1,22 @@
-pipeline {
+pipeline { 
     agent any 
+    options {
+        skipStagesAfterUnstable()
+    }
     stages {
         stage('Build') { 
-            steps {
-                echo "Hello"
+            steps { 
+                sh 'ls -al' 
             }
         }
-        stage('Test') { 
+        stage('Test'){
             steps {
-                // 
+                sh 'whoami'
             }
         }
-        stage('Deploy') { 
+        stage('Deploy') {
             steps {
-                // 
+                sh 'hostname'
             }
         }
     }
