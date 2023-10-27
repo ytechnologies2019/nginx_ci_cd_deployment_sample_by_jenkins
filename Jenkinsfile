@@ -1,7 +1,18 @@
 pipeline {
     agent any
 
+
+
     stages {
+        stage('Status Check') {
+            steps {
+                script {
+                    git clone 
+                    sh "cat index.html"
+                } 
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
                 script {
@@ -15,6 +26,7 @@ pipeline {
                     // SSH into the remote server and run the hostname command
                     sshCommand remote: remote, command: 'sudo apt update -y'
                     sshCommand remote: remote, command: 'sudo apt install nginx -y'
+                    sshCommand remote: remote, command: 'sudo systemctl start nginx'
                 } 
             }
         }
