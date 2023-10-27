@@ -4,11 +4,11 @@ pipeline {
 
 
     stages {
-        stage('Status Check') {
+        stage('Unit Test') {
             steps {
                 script {
-                    git clone 
-                    sh "cat index.html"
+                    git clone https://github.com/ytechnologies2019/nginx_ci_cd_deployment_sample_by_jenkins.git
+                    sh "cd nginx_ci_cd_deployment_sample_by_jenkins/index.html"
                 } 
             }
         }
