@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('ssh') {
+        stage('Install Dependencies') {
             steps {
                 script {
                     def remote = [:]
@@ -13,7 +13,8 @@ pipeline {
                     remote.allowAnyHosts = true
 
                     // SSH into the remote server and run the hostname command
-                    sshCommand remote: remote, command: 'hostname'
+                    sshCommand remote: remote, command: 'sudo apt update -y'
+                    sshCommand remote: remote, command: 'sudo apt install nginx -y'
                 } 
             }
         }
