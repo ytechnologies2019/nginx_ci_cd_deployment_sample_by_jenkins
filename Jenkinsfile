@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script {
                     sh "git clone https://github.com/ytechnologies2019/nginx_ci_cd_deployment_sample_by_jenkins.git"
-                    sh "cd nginx_ci_cd_deployment_sample_by_jenkins/index.html"
+                    sh "cat nginx_ci_cd_deployment_sample_by_jenkins/index.html"
                 } 
             }
         }
