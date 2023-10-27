@@ -6,15 +6,15 @@ pipeline {
             steps {
                 script {
                 def remote = [:]
-                remote.name = 'localhost'
-                remote.host = 'localhost'
-                remote.user = 'demouser'
-                remote.password = 'Demouser123!@#'
+                remote.name = '20.14.162.107'
+                remote.host = '20.14.162.107'
+                remote.user = 'student'
+                remote.password = 'Student@123!@#'
                 remote.allowAnyHosts = true
                 stage('Remote SSH') {
                 sshCommand remote: remote, command: "ls -lrt"
                 }
-                
+
                 }
             }
         }
