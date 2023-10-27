@@ -11,11 +11,9 @@ pipeline {
                 remote.user = 'student'
                 remote.password = 'Student@123!@#'
                 remote.allowAnyHosts = true
+                sshCommand remote: remote, command: "ls -lrt"
                 }
             }
-        }
-        stage('Remote SSH') {
-                sshCommand remote: remote, command: "ls -lrt"
         }
     }
 }
