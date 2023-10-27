@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build') { 
             steps { 
-                sh 'ls -alht' 
+                sh 'ls -alh' 
             }
         }
         stage('Test'){
