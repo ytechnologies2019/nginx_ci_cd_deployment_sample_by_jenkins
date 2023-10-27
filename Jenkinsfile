@@ -14,7 +14,11 @@ pipeline {
 
                     // SSH into the remote server and run the hostname command
                     sshCommand remote: remote, command: 'hostname'
-                }
+                } 
+            }
+
+        stage('check_ls') {
+            steps {
                 script {
                     def remote = [:]
                     remote.name = '20.14.162.107'
@@ -24,8 +28,9 @@ pipeline {
                     remote.allowAnyHosts = true
 
                     // SSH into the remote server and run the hostname command
-                    sshCommand remote: remote, command: 'ls -al'
+                    sshCommand remote: remote, command: 'ls -alht'
                 }
+            
             }
         }
     }
