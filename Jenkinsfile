@@ -1,19 +1,20 @@
 pipeline {
-    agent any
+    agent any 
     stages {
-        stage('Hello') {
+        stage('Build') { 
             steps {
-                script {
-                def remote = [:]
-                remote.name = '172.172.13.50'
-                remote.host = '172.172.13.50'
-                remote.user = 'demouser'
-                remote.password = 'Demouser123!@#'
-                remote.allowAnyHosts = true
-                stage('Remote SSH') {
-                }
+                // 
+            }
+        }
+        stage('Test') { 
+            steps {
+                // 
+            }
+        }
+        stage('Deploy') { 
+            steps {
+                // 
             }
         }
     }
-  }
 }
