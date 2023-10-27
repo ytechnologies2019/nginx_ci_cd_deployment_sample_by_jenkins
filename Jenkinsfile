@@ -9,7 +9,7 @@ pipeline {
                 } 
             }
         }
-    parallel (
+    parallel {
         stage('Install Dependencies') {
             steps {
                 script {
@@ -42,6 +42,6 @@ pipeline {
                 } 
             }
         }
-        )
+    }
     }
 }
