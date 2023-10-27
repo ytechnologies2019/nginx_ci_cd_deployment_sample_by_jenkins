@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('ssh') {
+        stage('Init') {
             steps {
                 script {
                     def remote = [:]
@@ -13,7 +13,14 @@ pipeline {
                     remote.allowAnyHosts = true
 
                     // SSH into the remote server and run the hostname command
-                    sshCommand remote: remote, command: 'hostname'
+                    def result = sshCommand remote: remote, command: 'hostname', returnStatus: true
+
+                    // Check the result of the command
+                    if (result == 0) {
+                        echo "Remote hostname: ${stdout.trim()}"
+                    } else {
+                        error "Failed to retrieve remote hostname"
+                    }
                 }
             }
         }
