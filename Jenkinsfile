@@ -5,9 +5,8 @@ pipeline {
         stage('Unit Test') {
             steps {
                 script { 
-                    sh "git pull"
+                    sh "pwd"
                     sh "cat nginx_ci_cd_deployment_sample_by_jenkins/index.html"
-
                 } 
             }
         }
