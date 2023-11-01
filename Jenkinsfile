@@ -16,8 +16,8 @@ pipeline {
                     def remote = [:]
                     remote.name = "${uat_remote_name}"
                     remote.host = "${uat_remote_ip}"
-                    remote.user = 'student'
-                    remote.password = 'Student@123!@#'
+                    remote.user = "${uat_remote_user}"
+                    remote.password = "${uat_remote_pass}"
                     remote.allowAnyHosts = true
 
                     // SSH into the remote server and run the hostname command
