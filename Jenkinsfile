@@ -20,6 +20,12 @@ pipeline {
                     remote.password = "${uat_remote_pass}"
                     remote.allowAnyHosts = true
 
+                    qa.remote.name = "${qa_remote_name}"
+                    qa.remote.host = "${qa_remote_ip}"
+                    qa.remote.user = "${qa_remote_user}"
+                    qa.remote.password = "${qa_remote_pass}"
+                    qa.remote.allowAnyHosts = true
+
                     // SSH into the remote server and run the hostname command
                     sshCommand remote: remote, command: 'sudo apt update -y'
                     sshCommand remote: remote, command: 'sudo apt install nginx -y'
