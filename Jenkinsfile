@@ -20,10 +20,10 @@ pipeline {
                     remote.password = "${uat_remote_pass}"
                     remote.allowAnyHosts = true
 
-                    qa.remote.name = "${qa_remote_name}"
-                    qa.remote.host = "${qa_remote_ip}"
-                    qa.remote.user = "${qa_remote_user}"
-                    qa.remote.password = "${qa_remote_pass}"
+                    qa.remote.name = '20.10.54.9'
+                    qa.remote.host = '20.10.54.9'
+                    qa.remote.user = 'demouser'
+                    qa.remote.password = 'Demouser123!@#'
                     qa.remote.allowAnyHosts = true
 
                     // // SSH into the remote server and run the hostname command
