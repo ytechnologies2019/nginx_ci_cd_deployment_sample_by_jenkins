@@ -26,6 +26,23 @@ pipeline {
                             sshCommand remote: remoteUAT, command: 'sudo apt install nginx -y'
                             sshCommand remote: remoteUAT, command: 'sudo systemctl start nginx'
                         }
+                    stage('Backup') {
+                        stage('Backup UAT') {
+                            steps {
+                                script {
+                                    def remoteUAT = [:]
+                                    remoteUAT.name = "${uat_remote_name}"
+                                    remoteUAT.host = "${uat_remote_ip}"
+                                    remoteUAT.user = "${uat_remote_user}"
+                                    remoteUAT.password = "${uat_remote_pass}"
+                                    remoteUAT.allowAnyHosts = true
+
+                                    sshCommand remote: remoteUAT, command: 'sudo apt update -y'
+                                    sshCommand remote: remoteUAT, command: 'sudo apt install nginx -y'
+                                    sshCommand remote: remoteUAT, command: 'sudo systemctl start nginx'
+                                 }
+                            }
+                        }
                     }
                 }
 
@@ -47,7 +64,7 @@ pipeline {
                 }
             }
         }
-//Backup Stage
+        //Backup Stage
         stage('Backup') {
             parallel {
                 stage('Backup UAT') {
