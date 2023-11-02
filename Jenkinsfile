@@ -10,7 +10,7 @@ pipeline {
             }
         }
 
-        stage('Parallel Stages') {
+        stage('Install Dependencies') {
             parallel {
                 stage('Install Dependencies UAT') {
                     steps {
@@ -24,7 +24,7 @@ pipeline {
 
                             sshCommand remote: remoteUAT, command: 'sudo apt update -y'
                             sshCommand remote: remoteUAT, command: 'sudo apt install nginx -y'
-                            sshCommand remote: remoteUAT, command: 'sudo systemctl stop nginx'
+                            sshCommand remote: remoteUAT, command: 'sudo systemctl start nginx'
                         }
                     }
                 }
@@ -41,11 +41,51 @@ pipeline {
 
                             sshCommand remote: remoteQA, command: 'sudo apt update -y'
                             sshCommand remote: remoteQA, command: 'sudo apt install nginx -y'
-                            sshCommand remote: remoteQA, command: 'sudo systemctl stop nginx'
+                            sshCommand remote: remoteQA, command: 'sudo systemctl start nginx'
                         }
                     }
                 }
             }
         }
-    }
-}
+
+        stage('Install Dependencies') {
+            parallel {
+                stage('Install Dependencies UAT') {
+                    steps {
+                        script {
+                            def remoteUAT = [:]
+                            remoteUAT.name = "${uat_remote_name}"
+                            remoteUAT.host = "${uat_remote_ip}"
+                            remoteUAT.user = "${uat_remote_user}"
+                            remoteUAT.password = "${uat_remote_pass}"
+                            remoteUAT.allowAnyHosts = true
+
+                            sshCommand remote: remoteUAT, command: 'sudo apt update -y'
+                            sshCommand remote: remoteUAT, command: 'sudo apt install nginx -y'
+                            sshCommand remote: remoteUAT, command: 'sudo systemctl start nginx'
+                        }
+                    }
+                }
+            }
+        }
+                stage('Install Dependencies') {
+            parallel {
+                stage('Install Dependencies UAT') {
+                    steps {
+                        script {
+                            def remoteUAT = [:]
+                            remoteUAT.name = "${uat_remote_name}"
+                            remoteUAT.host = "${uat_remote_ip}"
+                            remoteUAT.user = "${uat_remote_user}"
+                            remoteUAT.password = "${uat_remote_pass}"
+                            remoteUAT.allowAnyHosts = true
+
+                            sshCommand remote: remoteUAT, command: 'sudo apt update -y'
+                            sshCommand remote: remoteUAT, command: 'sudo apt install nginx -y'
+                            sshCommand remote: remoteUAT, command: 'sudo systemctl start nginx'
+                        }
+                    }
+                }
+            }
+        }
+        
