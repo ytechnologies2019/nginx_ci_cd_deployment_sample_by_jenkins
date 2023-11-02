@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        parallel (
+        parallel stage: {
         stage('Unit Test') {
             steps {
                 script { 
@@ -48,7 +48,7 @@ pipeline {
                 } 
             }
         }
-        )
+        }
         //  stage('Install Dependencies') {
         //     steps {
         //         script {
