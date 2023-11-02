@@ -2,8 +2,6 @@ pipeline {
     agent any
 
     stages {
-
-    parallel {
         stage('Unit Test') {
             steps {
                 script { 
@@ -12,60 +10,42 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies UAT') {
-            steps {
-                script {
-                    def remote = [:]
-                    remote.name = "${uat_remote_name}"
-                    remote.host = "${uat_remote_ip}"
-                    remote.user = "${uat_remote_user}"
-                    remote.password = "${uat_remote_pass}"
-                    remote.allowAnyHosts = true
+        stage('Parallel Stages') {
+            parallel {
+                stage('Install Dependencies UAT') {
+                    steps {
+                        script {
+                            def remoteUAT = [:]
+                            remoteUAT.name = "${uat_remote_name}"
+                            remoteUAT.host = "${uat_remote_ip}"
+                            remoteUAT.user = "${uat_remote_user}"
+                            remoteUAT.password = "${uat_remote_pass}"
+                            remoteUAT.allowAnyHosts = true
 
+                            sshCommand remote: remoteUAT, command: 'sudo apt update -y'
+                            sshCommand remote: remoteUAT, command: 'sudo apt install nginx -y'
+                            sshCommand remote: remoteUAT, command: 'sudo systemctl stop nginx'
+                        }
+                    }
+                }
 
+                stage('Install Dependencies QA') {
+                    steps {
+                        script {
+                            def remoteQA = [:]
+                            remoteQA.name = "${qa_remote_name}"
+                            remoteQA.host = "${qa_remote_ip}"
+                            remoteQA.user = "${qa_remote_user}"
+                            remoteQA.password = "${qa_remote_pass}"
+                            remoteQA.allowAnyHosts = true
 
-                    // SSH into the remote server and run the hostname command
-                    sshCommand remote: remote, command: 'sudo apt update -y'
-                    sshCommand remote: remote, command: 'sudo apt install nginx -y'
-                    sshCommand remote: remote, command: 'sudo systemctl stop nginx'
-                } 
+                            sshCommand remote: remoteQA, command: 'sudo apt update -y'
+                            sshCommand remote: remoteQA, command: 'sudo apt install nginx -y'
+                            sshCommand remote: remoteQA, command: 'sudo systemctl stop nginx'
+                        }
+                    }
+                }
             }
         }
-
-        stage('Install Dependencies QA') {
-            steps {
-                script {
-                    def remote = [:]
-                    remote.name = "${qa_remote_name}"
-                    remote.host = "${qa_remote_ip}"
-                    remote.user = "${qa_remote_user}"
-                    remote.password = "${qa_remote_pass}"
-                    remote.allowAnyHosts = true
-
-                    // SSH into the remote server and run the hostname command
-                    sshCommand remote: remote, command: 'sudo apt update -y'
-                    sshCommand remote: remote, command: 'sudo apt install nginx -y'
-                    sshCommand remote: remote, command: 'sudo systemctl stop nginx'
-                } 
-            }
-        }
-    }
-        //  stage('Install Dependencies') {
-        //     steps {
-        //         script {
-        //             def remote = [:]
-        //             remote.name = "${uat_remote_name}"
-        //             remote.host = "${uat_remote_ip}"
-        //             remote.user = "${uat_remote_user}"
-        //             remote.password = "${uat_remote_pass}"
-        //             remote.allowAnyHosts = true
-
-        //             // SSH into the remote server and run the hostname command
-        //             sshCommand remote: remote, command: 'sudo apt update -y'
-        //             sshCommand remote: remote, command: 'sudo apt install nginx -y'
-        //             sshCommand remote: remote, command: 'sudo systemctl start nginx'
-        //         } 
-        //     }
-        // }
     }
 }
