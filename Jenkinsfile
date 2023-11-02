@@ -60,7 +60,7 @@ pipeline {
                             remoteUAT.password = "${uat_remote_pass}"
                             remoteUAT.allowAnyHosts = true
 
-                            sshCommand remote: remoteUAT, command: 'mv /usr/share/nginx/html/* /tmp/'
+                            sshCommand remote: remoteUAT, command: 'sudo mv /usr/share/nginx/html/* /tmp/'
                         }
                     }
                 }
@@ -75,7 +75,7 @@ pipeline {
                             remoteQA.password = "${qa_remote_pass}"
                             remoteQA.allowAnyHosts = true
 
-                            sshCommand remote: remoteQA, command: 'mv /usr/share/nginx/html/* /tmp/'
+                            sshCommand remote: remoteQA, command: 'sudo mv /usr/share/nginx/html/* /tmp/'
                         }
                     }
                 }
