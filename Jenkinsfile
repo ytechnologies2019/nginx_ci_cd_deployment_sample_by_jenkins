@@ -73,7 +73,7 @@ pipeline {
                             remoteQA.host = "${qa_remote_ip}"
                             remoteQA.user = "${qa_remote_user}"
                             remoteQA.password = "${qa_remote_pass}"
-                            remoteQA.allowAnyHosts = true
+                            remoteQA.allowAnyHosts = true 
 
                             sshCommand remote: remoteQA, command: 'sudo mv /usr/share/nginx/html/* /tmp/'
                         }
