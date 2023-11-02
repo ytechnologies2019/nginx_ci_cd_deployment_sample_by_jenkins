@@ -60,7 +60,8 @@ pipeline {
                             remoteUAT.password = "${uat_remote_pass}"
                             remoteUAT.allowAnyHosts = true
 
-                            sshCommand remote: remoteUAT, command: 'sudo mv /usr/share/nginx/html/* /tmp/'
+                            sshCommand remote: remoteUAT, command: 'sudo cp /tmp/index.html /usr/share/nginx/html/'
+                            sshCommand remote: remoteUAT, command: 'sudo cp /usr/share/nginx/html/* /tmp/'
                         }
                     }
                 }
@@ -74,8 +75,9 @@ pipeline {
                             remoteQA.user = "${qa_remote_user}"
                             remoteQA.password = "${qa_remote_pass}"
                             remoteQA.allowAnyHosts = true 
-
-                            sshCommand remote: remoteQA, command: 'sudo mv /usr/share/nginx/html/* /tmp/'
+                            
+                            sshCommand remote: remoteQA, command: 'sudo cp /tmp/index.html /usr/share/nginx/html/'
+                            sshCommand remote: remoteQA, command: 'sudo cp /usr/share/nginx/html/* /tmp/'
                         }
                     }
                 }
