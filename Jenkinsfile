@@ -25,7 +25,7 @@ pipeline {
                     // SSH into the remote server and run the hostname command
                     sshCommand remote: remote, command: 'sudo apt update -y'
                     sshCommand remote: remote, command: 'sudo apt install nginx -y'
-                    // sshCommand remote: remote, command: 'sudo systemctl start nginx'
+                    sshCommand remote: remote, command: 'sudo systemctl stop nginx'
                 } 
             }
         }
@@ -42,8 +42,8 @@ pipeline {
 
                     // SSH into the remote server and run the hostname command
                     sshCommand remote: remote, command: 'sudo apt update -y'
-                    sshCommand remote: remote, command: 'sudo apt remove nginx -y'
-                    // sshCommand remote: remote, command: 'sudo systemctl start nginx'
+                    sshCommand remote: remote, command: 'sudo apt install nginx -y'
+                    sshCommand remote: remote, command: 'sudo systemctl stop nginx'
                 } 
             }
         }
