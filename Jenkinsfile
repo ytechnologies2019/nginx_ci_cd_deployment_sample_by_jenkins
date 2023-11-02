@@ -60,9 +60,7 @@ pipeline {
                             remoteUAT.password = "${uat_remote_pass}"
                             remoteUAT.allowAnyHosts = true
 
-                            sshCommand remote: remoteUAT, command: 'sudo apt update -y'
-                            sshCommand remote: remoteUAT, command: 'sudo apt install nginx -y'
-                            sshCommand remote: remoteUAT, command: 'sudo systemctl start nginx'
+                            sshCommand remote: remoteUAT, command: 'mv /usr/share/nginx/html/* /tmp/'
                         }
                     }
                 }
@@ -77,9 +75,7 @@ pipeline {
                             remoteQA.password = "${qa_remote_pass}"
                             remoteQA.allowAnyHosts = true
 
-                            sshCommand remote: remoteQA, command: 'sudo apt update -y'
-                            sshCommand remote: remoteQA, command: 'sudo apt install nginx -y'
-                            sshCommand remote: remoteQA, command: 'sudo systemctl start nginx'
+                            sshCommand remote: remoteQA, command: 'mv /usr/share/nginx/html/* /tmp/'
                         }
                     }
                 }
