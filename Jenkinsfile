@@ -45,23 +45,6 @@ pipeline {
                         }
                     }
                 }
-            //Backup Stage
-            stage ('Take Backup') 
-            
-                stage('Install Dependencies QA') {
-                    steps {
-                        script {
-                            def remoteQA = [:]
-                            remoteQA.name = "${qa_remote_name}"
-                            remoteQA.host = "${qa_remote_ip}"
-                            remoteQA.user = "${qa_remote_user}"
-                            remoteQA.password = "${qa_remote_pass}"
-                            remoteQA.allowAnyHosts = true
-
-                            sshCommand remote: remoteQA, command: 'whoami'
-                        }
-                    }
-                }
             }
         }
     }
