@@ -48,9 +48,9 @@ pipeline {
             }
         }
 //Backup Stage
-        stage('Install Dependencies') {
+        stage('Backup') {
             parallel {
-                stage('Install Dependencies UAT') {
+                stage('Backup UAT') {
                     steps {
                         script {
                             def remoteUAT = [:]
@@ -67,7 +67,7 @@ pipeline {
                     }
                 }
 
-                stage('Install Dependencies QA') {
+                stage('Backup QA') {
                     steps {
                         script {
                             def remoteQA = [:]
